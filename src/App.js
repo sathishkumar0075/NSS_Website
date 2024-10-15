@@ -20,6 +20,6 @@ export default function App() {
 
 
   return(<>
-    <ScheduledMeetings/>
+    <AttendancePage/>
     </>)
 }
