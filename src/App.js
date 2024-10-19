@@ -16,7 +16,7 @@ export default function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/save-attendance" element={<Layout />} />
-        <Route path="/attendance" element={<AttendancePage />} />
+        <Route path="/attendance" element={<AttendancePage />} /> // Page for Students to view attendance
         <Route path="/attendance-tracker" element={<AttendanceTracker />} />
         <Route path="/new-meeting" element={<NewMeeting />} />
         <Route path="/scheduled-meetings" element={<ScheduledMeetings />} />

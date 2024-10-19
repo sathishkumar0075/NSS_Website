@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import attendanceRoutes from './routes/attendance.js';
 import registerRoutes from './routes/register.js';
+import meetingRoutes from "./routes/meetings.js";
 import { query } from './db/index.js';
 dotenv.config();
 
@@ -16,7 +17,7 @@ app.use(express.json());
 // Routes
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/register', registerRoutes);
-
+app.use('/api/meetings',meetingRoutes);
 
 app.post('/', async (req, res) => {
   //const { name, register_no, branch, year_of_study, dob, gender, blood_group, email, mobile, aadhar_no } = req.body;
