@@ -34,6 +34,20 @@ router.post('/', async (req, res) => {
   });
 
 
+  router.post('/:id/attendance', async (req, res) => {
+    const { id } = req.params;
+    try {
+      // Update attendance status to 'Taken'
+      await pool.query('UPDATE meetings SET status = $1 WHERE id = $2', ['Taken', id]);
+      res.sendStatus(204); // No content
+    } catch (err) {
+      console.error(err); // Log the error for debugging
+      res.status(500).json({ error: 'Database error' });
+    }
+  });
+
+
+
 router.get('/summa',(req,res)=>{
     return res.json('Meetings');
 })

@@ -19,7 +19,7 @@ function AttendanceTracker() {
             Upcoming
           </h2>
           <AttendanceList />
-          <UpcomingMeetings />
+          {/* <UpcomingMeetings /> */}
         </div>
       </main>
     </div>
