@@ -1,41 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import MeetingItem from './MeetingItem';
 
-const meetingsData = [
-  {
-    title: "Product review",
-    schedule: "Every Monday,9:30am-10:00am",
-    iconSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/ae100e25abb34a4c68dbb768fe851d9b5e42784e86df12281a5e0c269c1d9e2b?placeholderIfAbsent=true&apiKey=847064471252402daefe7a4367a8e307"
-  },
-  {
-    title: "Design sync",
-    schedule: "Every Tuesday,1:30pm-2:30pm",
-    iconSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/633cef16436c79b0ea9afdb7d7b4bf319c8e8324e03363d300a36c9bdcb4b4c6?placeholderIfAbsent=true&apiKey=847064471252402daefe7a4367a8e307"
-  },
-  {
-    title: "Roadmap review",
-    schedule: "Every Wednesday,2:00pm-3:00pm",
-    iconSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/ffe51dfd2c4283f0dde21db23146d837e5143de3cc2e6fe207b91218b0144793?placeholderIfAbsent=true&apiKey=847064471252402daefe7a4367a8e307"
-  },
-  {
-    title: "Sprint planning",
-    schedule: "Every Thursday,10:00am-11:00am",
-    iconSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/b01134fa924158fc7c231337742f519916984a71a49172b1642a034f49a0e08d?placeholderIfAbsent=true&apiKey=847064471252402daefe7a4367a8e307"
-  },
-  {
-    title: "Retro",
-    schedule: "Every Friday,11:00am-12:00pm",
-    iconSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/7eb85d916282931cd6917277ab4d30c0865eb2eda0a82e5778335124a4d208cf?placeholderIfAbsent=true&apiKey=847064471252402daefe7a4367a8e307"
-  }
-];
-
 function MeetingList() {
+  const [meetings, setMeetings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Filter meetings based on search term
+  
+
+  useEffect(() => {
+    // Fetch meetings from the database (API call)
+    const fetchMeetings = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/meetings');
+        setMeetings(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching meetings:', error);
+        setError('Could not fetch meetings. Please try again later.');
+        setLoading(false);
+      }
+    };
+
+    fetchMeetings();
+  }, []);
+
+  if (loading) {
+    return <p>Loading meetings...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  const filteredMeetings = meetings.filter(meeting =>
+    meeting.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <ul className="flex flex-col pt-1 pr-3.5 pb-4 w-full bg-black bg-opacity-0 max-md:max-w-full">
-      {meetingsData.map((meeting, index) => (
-        <MeetingItem key={index} {...meeting} />
-      ))}
+    <div className="flex flex-col pt-1 pr-3.5 pb-4 w-full bg-black bg-opacity-0 max-md:max-w-full">
+    <input
+      type="text"
+      placeholder="Search meetings..."
+      className="mb-4 p-2 border border-gray-300 rounded"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+    <ul className="flex flex-col">
+      {filteredMeetings.length > 0 ? (
+        filteredMeetings.map((meeting, index) => (
+          <MeetingItem key={index} {...meeting} />
+        ))
+      ) : (
+        <li className="text-gray-500">No meetings found</li>
+      )}
     </ul>
+  </div>
   );
 }
 
