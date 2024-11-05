@@ -52,4 +52,4 @@ router.get('/summa',(req,res)=>{
     return res.json('Meetings');
 })
 
-  export default router;
+export default router;

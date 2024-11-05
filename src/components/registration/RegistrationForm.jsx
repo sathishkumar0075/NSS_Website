@@ -12,6 +12,7 @@ function RegistrationForm() {
     email: '',
     mobile: '',
     aadharNo: '',
+    password :'',
   });
 
   // Handle changes in input fields
@@ -189,6 +190,20 @@ function RegistrationForm() {
               name="email"
               placeholder="Enter your Email id"
               value={formData.email}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          {/* Password */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1" htmlFor="branch">Branch</label>
+            <input
+              type="text"
+              id="password"
+              name="password"
+              placeholder="Enter your branch details"
+              value={formData.password}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
