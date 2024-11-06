@@ -1,5 +1,5 @@
 import React from 'react';
-
+import RoleBasedDropdown from './DropDown/RoleBasedDropdown.js';
 const Header = () => {
   return (
     <header className="flex flex-wrap gap-2 justify-between px-8 py-3 w-full text-xl font-extrabold text-white bg-pink-500 rounded-3xl shadow-[0px_4px_6px_rgba(0,0,0,0.25)] max-md:px-5 max-md:max-w-full">
@@ -13,6 +13,8 @@ const Header = () => {
         <a href="#news">News</a>
         <a href="#about" className="basis-auto">About us</a>
         <a href="#contact" className="basis-auto">Contact us</a>
+        <RoleBasedDropdown/>
+        
       </nav>
       <a href="/login">
       <img loading="lazy"  src="https://cdn.builder.io/api/v1/image/assets/TEMP/39a95f273ee9ed9d6ab92224ad31a585c48bcb5dce4ba97b2dff79f23adbfa09?placeholderIfAbsent=true&apiKey=847064471252402daefe7a4367a8e307" alt="" className="object-contain shrink-0 aspect-[1.07] w-[45px]" />
