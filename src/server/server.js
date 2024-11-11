@@ -7,6 +7,9 @@ import meetingRoutes from "./routes/meetings.js";
 import loginRoutes from "./routes/login.js";
 import { query } from './db/index.js';
 import bcrypt from 'bcryptjs';
+import analyticsRoutes from "./routes/analytics.js";
+
+
 const JWT_SECRET = "Vettaiyan";
 dotenv.config();
 
@@ -22,6 +25,7 @@ app.use('/api/attendance', attendanceRoutes);
 app.use('/api/register', registerRoutes);
 app.use('/api/meetings',meetingRoutes);
 app.use('/api/login',loginRoutes);
+app.use('/api/analytics',analyticsRoutes);
 
 app.post('/', async (req, res) => {
   //const { name, register_no, branch, year_of_study, dob, gender, blood_group, email, mobile, aadhar_no } = req.body;

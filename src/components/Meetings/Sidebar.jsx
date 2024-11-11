@@ -3,7 +3,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import { HomeIcon, UserGroupIcon, CalendarIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 const navItems = [
-  { name: 'Dashboard', path: '/admin', icon: <HomeIcon className="h-6 w-6" /> },
+  { name: 'Dashboard', path: '/admin/dashboard', icon: <HomeIcon className="h-6 w-6" /> },
   { name: 'Take Attendance', path: '/admin/take', icon: <UserGroupIcon className="h-6 w-6" /> },
   { name: 'Meetings', path: '/admin/meetings', icon: <CalendarIcon className="h-6 w-6" /> },
  

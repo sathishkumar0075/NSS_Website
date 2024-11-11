@@ -12,6 +12,7 @@ import ScheduledMeetings from './components/SheduledMeetings/SheduledMeeting.jsx
 import Login from './components/Login/Login.js';
 import MeetingDetails from "./components/Meetings/MeetingDetails.jsx";
 import AttendanceList from './components/AttendanceTracker/AttendanceList.jsx';
+import AdminDashboard from './components/Dashboard/AdminDashboard.js';
 import { UserProvider } from './UserContext.js'; 
 
 export default function App() {
@@ -23,11 +24,12 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/attendance/:userId" element={<AttendancePage  />} />
+        <Route path="/list" element={<AttendanceList />} />
         
         {/* Protected routes that require authentication */}
         <Route path="/admin/*" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+          <Route path="dashboard" element={<AdminRoute><AdminDashboard/></AdminRoute>}/>
           
-          <Route path="list" element={<AttendanceList />} />
           
           <Route path="meetings" element={<AttendanceTracker />} />
           <Route path="take" element={<MeetingDetails />} />

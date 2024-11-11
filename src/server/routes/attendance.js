@@ -33,6 +33,7 @@ router.get('/:unitId', async (req, res) => {
 });
 
 
+
 // Add a new attendance record for a user
 router.post('/', async (req, res) => {
   const { date, type, topic, attended, user_id } = req.body;

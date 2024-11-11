@@ -58,6 +58,8 @@ router.post('/', async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch meeting data, please try again later' });
     }
   });
+
+
   
 
   router.post('/:id/attendance', async (req, res) => {

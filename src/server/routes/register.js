@@ -1,7 +1,7 @@
-import { query } from '../db/index.js';
-import express from 'express';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import { query } from "../db/index.js";
+import express from "express";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
 const JWT_SECRET = "Vettaiyan"; // Add JWT_SECRET in your .env file
@@ -36,7 +36,7 @@ const JWT_SECRET = "Vettaiyan"; // Add JWT_SECRET in your .env file
 
 //     // Insert into the database
 //     const result = await query(
-//       `INSERT INTO students (name, register_no, branch, year_of_study, dob, gender, blood_group, email, mobile, aadhar_no, password) 
+//       `INSERT INTO students (name, register_no, branch, year_of_study, dob, gender, blood_group, email, mobile, aadhar_no, password)
 //        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
 //       [name, registerNo, branch, yearOfStudy, dobValue, gender, bloodGroup, email, mobile, aadharNo, hashedPassword]
 //     );
@@ -48,8 +48,20 @@ const JWT_SECRET = "Vettaiyan"; // Add JWT_SECRET in your .env file
 //   }
 // });
 
-router.post('/register', async (req, res) => {
-  const { name, registerNo, branch, yearOfStudy, dob, gender, bloodGroup, email, mobile, aadharNo, password } = req.body;
+router.post("/", async (req, res) => {
+  const {
+    name,
+    registerNo,
+    branch,
+    yearOfStudy,
+    dob,
+    gender,
+    bloodGroup,
+    email,
+    mobile,
+    aadharNo,
+    password,
+  } = req.body;
 
   try {
     // Fetch the current number of students in each unit
@@ -57,7 +69,10 @@ router.post('/register', async (req, res) => {
     const unitCapacities = {};
 
     for (let unit of units) {
-      const result = await client.query('SELECT COUNT(*) FROM students WHERE unit = $1', [unit]);
+      const result = await query(
+        "SELECT COUNT(*) FROM students WHERE unit = $1",
+        [unit]
+      );
       unitCapacities[unit] = parseInt(result.rows[0].count, 10);
     }
 
@@ -69,30 +84,60 @@ router.post('/register', async (req, res) => {
         break; // Assign to the first unit with space
       }
     }
+    console.log("Assigned Unit : ",assignedUnit);
 
     if (!assignedUnit) {
-      return res.status(400).json({ error: 'All units are full. Cannot register student.' });
+      return res
+        .status(400)
+        .json({ error: "All units are full. Cannot register student." });
     }
 
     // Insert the student data into the students table with the assigned unit
     const insertQuery = `
-      INSERT INTO students (name, registerNo, branch, yearOfStudy, dob, gender, bloodGroup, email, mobile, aadharNo, password, unit)
+      INSERT INTO students (
+  name, 
+  register_no, 
+  branch, 
+  year_of_study, 
+  dob, 
+  gender, 
+  blood_group, 
+  email, 
+  mobile, 
+  aadhar_no, 
+  password, 
+  unit
+)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
     `;
+    console.log(insertQuery);
 
-    await client.query(insertQuery, [
-      name, registerNo, branch, yearOfStudy, dob, gender, bloodGroup, email, mobile, aadharNo, password, assignedUnit
+    await query(insertQuery, [
+      name,
+      registerNo,
+      branch,
+      yearOfStudy,
+      dob,
+      gender,
+      bloodGroup,
+      email,
+      mobile,
+      aadharNo,
+      password,
+      assignedUnit,
     ]);
 
-    return res.status(200).json({ message: 'Registration successful', unit: assignedUnit });
+    return res
+      .status(200)
+      .json({ message: "Registration successful", unit: assignedUnit });
   } catch (error) {
-    console.error('Error during registration:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error("Error during registration:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 
-router.get('/',(req,res)=>{
-    return res.json('Hello');
-})
+router.get("/", (req, res) => {
+  return res.json("Hello");
+});
 
 export default router;

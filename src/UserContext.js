@@ -14,9 +14,13 @@ export const UserProvider = ({ children }) => {
     try {
       const response = await axios.post('http://localhost:5000/api/login', { email, password });
       // Assuming the response contains token and role
+      console.log("use Context response : ",response)
       setUser({ token: response.data.token,reg_no:response.data.reg_no, role: response.data.role });
       localStorage.setItem('token', response.data.token); // Save token in local storage
-      localStorage.setItem('role', response.data.role); // Save role in local storage
+      localStorage.setItem('role', response.data.role); 
+      localStorage.setItem('reg_no', response.data.reg_no); 
+      
+      // Save role in local storage
       console.log("The User at context : ",user);
       setError(null); // Clear any previous errors
       console.log("Login successful:", response.data); // Log the successful login response

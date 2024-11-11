@@ -52,38 +52,26 @@ const RoleBasedDropdown = () => {
                       Attendance
                     </Link>
                     <Link
-                      to={`/attendance-tracker/${user.userId}`}
+                      to={`/list`}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition duration-150 ease-in-out"
                       role="menuitem"
-                      onClick={() => handleOptionClick('Attendance Tracker')}
+                      onClick={() => handleOptionClick('Meetings')}
                     >
-                      Attendance Tracker
+                      Meetings
                     </Link>
                   </>
                 )}
-                <button
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition duration-150 ease-in-out"
-                  role="menuitem"
-                  onClick={() => handleOptionClick('Profile')}
-                >
-                  Profile
-                </button>
-                <button
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition duration-150 ease-in-out"
-                  role="menuitem"
-                  onClick={() => handleOptionClick('Settings')}
-                >
-                  Settings
-                </button>
+                
               </>
             ) : (
-              <button
+              <Link
+                to={"/login"}
                 className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition duration-150 ease-in-out"
                 role="menuitem"
                 onClick={() => handleOptionClick('Login')}
               >
                 Login
-              </button>
+              </Link>
             )}
           </div>
         </div>
