@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { TextField, MenuItem, Select, InputLabel, FormControl, Radio, RadioGroup, FormControlLabel, Button, Box, Typography } from '@mui/material';
 
 function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -12,8 +15,10 @@ function RegistrationForm() {
     email: '',
     mobile: '',
     aadharNo: '',
-    password :'',
+    password: '',
   });
+  const navigate = useNavigate();
+
 
   // Handle changes in input fields
   const handleChange = (e) => {
@@ -42,6 +47,7 @@ function RegistrationForm() {
 
       const result = await response.json();
       console.log('Registration successful:', result);
+      navigate('/login');
       // You can also reset the form or redirect the user here
     } catch (error) {
       console.error('Error during registration:', error);
@@ -49,207 +55,302 @@ function RegistrationForm() {
   };
 
   return (
-    <main className="flex flex-col px-4 py-10 bg-gray-100">
-      <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold text-center text-gray-800">Registration</h2>
-        <p className="text-gray-600 text-center mb-4">Enter your details below</p>
-        <form className="space-y-4" onSubmit={handleSubmit}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', p: 3, backgroundColor: '#FFE3EC' }}>
+      <Box sx={{ width: '100%', maxWidth: 600, backgroundColor: 'white', p: 4, borderRadius: 5, boxShadow: 3 }}>
+        <Typography variant="h5" align="center" gutterBottom sx={{ color: '#FF4D94' }}>
+          Registration Form
+        </Typography>
+        <form onSubmit={handleSubmit}>
           {/* Name Field */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1" htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+          <TextField
+            label="Name"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#FF4D94',
+                },
+              },
+            }}
+          />
 
           {/* Register No Field */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1" htmlFor="registerNo">Register No</label>
-            <input
-              type="text"
-              id="registerNo"
-              name="registerNo"
-              placeholder="Enter your registration number"
-              value={formData.registerNo}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+          <TextField
+            label="Register No"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            name="registerNo"
+            value={formData.registerNo}
+            onChange={handleChange}
+            required
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#FF4D94',
+                },
+              },
+            }}
+          />
 
           {/* Branch Field */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1" htmlFor="branch">Branch</label>
-            <input
-              type="text"
-              id="branch"
-              name="branch"
-              placeholder="Enter your branch details"
-              value={formData.branch}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+          <TextField
+            label="Branch"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            name="branch"
+            value={formData.branch}
+            onChange={handleChange}
+            required
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#FF4D94',
+                },
+              },
+            }}
+          />
 
-          {/* Year Of Study Select Field */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1" htmlFor="yearOfStudy">Year Of Study</label>
-            <select
-              id="yearOfStudy"
+          {/* Year of Study Select Field */}
+          <FormControl fullWidth margin="normal" required>
+            <InputLabel>Year Of Study</InputLabel>
+            <Select
               name="yearOfStudy"
               value={formData.yearOfStudy}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+              label="Year Of Study"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#FF4D94',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#FF4D94',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#FF4D94',
+                  },
+                },
+              }}
             >
-              <option value="">Select Year Of Study</option>
-              <option value="1">1st Year</option>
-              <option value="2">2nd Year</option>
-              <option value="3">3rd Year</option>
-              <option value="4">4th Year</option>
-            </select>
-          </div>
+              <MenuItem value="1">1st Year</MenuItem>
+              <MenuItem value="2">2nd Year</MenuItem>
+              <MenuItem value="3">3rd Year</MenuItem>
+              <MenuItem value="4">4th Year</MenuItem>
+            </Select>
+          </FormControl>
 
           {/* DOB Field */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1" htmlFor="dob">Date of Birth</label>
-            <input
-              type="date"
-              id="dob"
-              name="dob"
-              value={formData.dob}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+          <TextField
+            label="Date of Birth"
+            type="date"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            name="dob"
+            value={formData.dob}
+            onChange={handleChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#FF4D94',
+                },
+              },
+            }}
+          />
 
-          {/* Gender Field */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1">Gender</label>
-            <div className="flex space-x-4">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="male"
-                  onChange={handleChange}
-                  className="mr-2"
-                />
-                Male
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="female"
-                  onChange={handleChange}
-                  className="mr-2"
-                />
-                Female
-              </label>
-            </div>
-          </div>
+          {/* Gender Radio Field */}
+          <FormControl component="fieldset" margin="normal">
+            <Typography variant="body1">Gender</Typography>
+            <RadioGroup row name="gender" value={formData.gender} onChange={handleChange}>
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel value="female" control={<Radio />} label="Female" />
+            </RadioGroup>
+          </FormControl>
 
           {/* Blood Group Select Field */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1" htmlFor="bloodGroup">Blood Group</label>
-            <select
-              id="bloodGroup"
+          <FormControl fullWidth margin="normal" required>
+            <InputLabel>Blood Group</InputLabel>
+            <Select
               name="bloodGroup"
               value={formData.bloodGroup}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+              label="Blood Group"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: '#FF4D94',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: '#FF4D94',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#FF4D94',
+                  },
+                },
+              }}
             >
-              <option value="">Select Blood Group</option>
-              <option value="A+">A+</option>
-              <option value="A-">A-</option>
-              <option value="B+">B+</option>
-              <option value="B-">B-</option>
-              <option value="O+">O+</option>
-              <option value="O-">O-</option>
-              <option value="AB+">AB+</option>
-              <option value="AB-">AB-</option>
-            </select>
-          </div>
+              <MenuItem value="A+">A+</MenuItem>
+              <MenuItem value="A-">A-</MenuItem>
+              <MenuItem value="B+">B+</MenuItem>
+              <MenuItem value="B-">B-</MenuItem>
+              <MenuItem value="O+">O+</MenuItem>
+              <MenuItem value="O-">O-</MenuItem>
+              <MenuItem value="AB+">AB+</MenuItem>
+              <MenuItem value="AB-">AB-</MenuItem>
+            </Select>
+          </FormControl>
 
           {/* Email Field */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1" htmlFor="email">Mail ID</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your Email id"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          {/* Password */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1" htmlFor="branch">Branch</label>
-            <input
-              type="text"
-              id="password"
-              name="password"
-              placeholder="Enter your branch details"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+          <TextField
+            label="Email ID"
+            variant="outlined"
+            type="email"
+            fullWidth
+            margin="normal"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#FF4D94',
+                },
+              },
+            }}
+          />
 
           {/* Mobile Field */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1" htmlFor="mobile">Mobile</label>
-            <input
-              type="tel"
-              id="mobile"
-              name="mobile"
-              placeholder="Enter your Mobile number"
-              value={formData.mobile}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+          <TextField
+            label="Mobile"
+            variant="outlined"
+            type="tel"
+            fullWidth
+            margin="normal"
+            name="mobile"
+            value={formData.mobile}
+            onChange={handleChange}
+            required
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#FF4D94',
+                },
+              },
+            }}
+          />
 
           {/* Aadhar No Field */}
-          <div>
-            <label className="block text-gray-700 font-medium mb-1" htmlFor="aadharNo">Aadhar No</label>
-            <input
-              type="text"
-              id="aadharNo"
-              name="aadharNo"
-              placeholder="Enter your Aadhar number"
-              value={formData.aadharNo}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+          <TextField
+            label="Aadhar No"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            name="aadharNo"
+            value={formData.aadharNo}
+            onChange={handleChange}
+            required
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#FF4D94',
+                },
+              },
+            }}
+          />
+
+          {/* Password Field */}
+          <TextField
+            label="Password"
+            variant="outlined"
+            type="password"
+            fullWidth
+            margin="normal"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#FF4D94',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#FF4D94',
+                },
+              },
+            }}
+          />
 
           {/* Submit Button */}
-          <button
+          <Button
             type="submit"
-            className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition duration-200"
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ mt: 2, backgroundColor: '#FF4D94', '&:hover': { backgroundColor: '#FF1E69' } }}
           >
             Register
-          </button>
+          </Button>
         </form>
-      </div>
-    </main>
+      </Box>
+    </Box>
   );
 }
 

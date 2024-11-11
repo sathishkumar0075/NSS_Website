@@ -86,7 +86,7 @@ function MeetingDetails() {
     };
 
     return (
-        <section className="flex ml-6 flex-col mx-auto w-full max-w-full p-3 bg-white  rounded-lg">
+        <section className="flex ml-6 flex-col mx-auto w-full max-w-full mt-12 p-3 bg-white  rounded-lg">
             <div className="flex flex-col mb-8">
                 <h1 className="text-3xl font-semibold text-gray-800">General Body Meeting</h1>
                 <p className="text-sm text-gray-500 mt-2">9/13/22, 6:00PM</p>
