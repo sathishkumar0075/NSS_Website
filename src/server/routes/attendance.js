@@ -7,14 +7,16 @@ const router = express.Router();
 
 
 router.get('/:unitId', async (req, res) => {
-  const { unitId } = req.params; // Extract userId from the URL parameters
+  
+  const { unitId } = req.params;
+  console.log("Server Unit ID : ",unitId) // Extract userId from the URL parameters
   console.log("User id : ",unitId);
 
   try {
     // Execute SQL query, properly formatting the userId value in quotes
 
     const result = await query(
-      `SELECT * FROM master_attendance WHERE reg_no = '${unitId}'` // Query with reg_no formatted correctly
+      `SELECT * FROM students WHERE unit = '${unitId}'` // Query with reg_no formatted correctly
     );
     console.log(result);
 

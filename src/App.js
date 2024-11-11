@@ -30,7 +30,7 @@ export default function App() {
           <Route path="list" element={<AttendanceList />} />
           
           <Route path="meetings" element={<AttendanceTracker />} />
-          <Route path="meet" element={<MeetingDetails />} />
+          <Route path="take" element={<MeetingDetails />} />
           <Route path="new" element={<AdminRoute><NewMeeting /></AdminRoute>} />
           <Route path="scheduled-meetings" element={<AdminRoute><ScheduledMeetings /></AdminRoute>} />
         </Route>
