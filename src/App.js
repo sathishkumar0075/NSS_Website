@@ -13,7 +13,9 @@ import Login from './components/Login/Login.js';
 import MeetingDetails from "./components/Meetings/MeetingDetails.jsx";
 import AttendanceList from './components/AttendanceTracker/AttendanceList.jsx';
 import AdminDashboard from './components/Dashboard/AdminDashboard.js';
+import AddEvent from './components/Events/AddEvents.js';
 import { UserProvider } from './UserContext.js'; 
+
 
 export default function App() {
   return (
@@ -29,7 +31,7 @@ export default function App() {
         {/* Protected routes that require authentication */}
         <Route path="/admin/*" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
           <Route path="dashboard" element={<AdminRoute><AdminDashboard/></AdminRoute>}/>
-          
+          <Route path="events" element={<AdminRoute><AddEvent/></AdminRoute>}/>
           
           <Route path="meetings" element={<AttendanceTracker />} />
           <Route path="take" element={<MeetingDetails />} />

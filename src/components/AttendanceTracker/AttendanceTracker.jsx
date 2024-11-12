@@ -9,7 +9,7 @@ function AttendanceTracker() {
       <main className="flex z-10 flex-col pt-1 pb-7 -mt-2.5 w-full  max-md:max-w-full">
         <div className="flex shrink-0 h-0.5  max-md:max-w-full" />
         <div className="flex flex-col self-center mt-10 w-full max-w-[1062px] max-md:max-w-full">
-          <div className="flex flex-wrap gap-5 justify-between ml-3 whitespace-nowrap max-md:mr-0.5 max-md:max-w-full">
+          <div className="flex flex-wrap gap-5 justify-between  whitespace-nowrap max-md:mr-0.5 max-md:max-w-full">
             <h1 className="my-auto text-4xl text-zinc-900">Meetings</h1>
            
           </div>

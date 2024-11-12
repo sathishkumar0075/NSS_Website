@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   const [roles, setRoles] = useState({});
   const [totalMeetings, setTotalMeetings] = useState(0);
   const [average, setAverage] = useState('');
- 
+  const [searchTerm, setSearchTerm] = useState(''); // New state for search term
 
   useEffect(() => {
     // Fetch all students
@@ -29,14 +29,11 @@ const AdminDashboard = () => {
     axios.get('http://localhost:5000/api/analytics/another')
       .then(response => setTotalMeetings(response.data))
       .catch(error => console.error("Error Fetching Meetings Length:", error));
-      console.log("At Dashbaord : ",totalMeetings);
 
     // Fetch average attendance
     axios.get("http://localhost:5000/api/analytics/average")
       .then(response => setAverage(response.data))
       .catch(error => console.error("Error Fetching the average:", error));
-
-    // Fetch attendance data
    
   }, []);
 
@@ -50,7 +47,12 @@ const AdminDashboard = () => {
       .catch(error => console.error('Error updating role:', error));
   };
 
-  // Chart Data for Students by Unit
+  // Filter students based on the search term
+  const filteredStudents = students.filter(student =>
+    student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    student.unit.toString().includes(searchTerm)
+  );
+
   const unitChartData = {
     labels: analytics ? analytics.unitCounts.map(unit => `Unit ${unit.unit}`) : [],
     datasets: [
@@ -65,31 +67,40 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6">
-     
-
+    <div className="container mx-auto px-4 py-6 mt-12">
       {analytics && (
         <div className="mb-8">
-          <h2 className="text-2xl font-semibold">Summary</h2>
+          <h2 className="text-5xl font-bold">Summary</h2>
           <Summary
             length={totalMeetings}
             average={average}
-           // Pass attendance data
             unitChartData={unitChartData}
           />
-
-          {/* Students by Unit Chart */}
-          {/* <div className="my-4">
-            <h3 className="text-xl font-medium">Students by Unit</h3>
-            <div className="bg-white shadow-md p-6 rounded-lg">
-              <Bar data={unitChartData} />
-            </div>
-          </div> */}
         </div>
       )}
 
+      <hr className="mx-auto mt-2 w-full my-4 border-t-2 border-black" />
+
+      {/* Search Bar */}
+      <div className="flex items-center mb-4 relative">
+  <input
+    type="text"
+    placeholder="Search by name or unit"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    className="w-1/4 px-12 py-3 border border-gray-300 rounded-full shadow-md focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition duration-300 ease-in-out"
+  />
+  <svg
+    className="absolute left-4 text-gray-500 w-6 h-6"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M10 2a8 8 0 0 1 6.32 12.9l5.387 5.387a1 1 0 0 1-1.414 1.415l-5.387-5.387A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 4.472 10.066 1 1 0 0 1 .098-.131l.084-.084a1 1 0 0 1 .089-.098A6 6 0 0 0 10 4z" />
+  </svg>
+</div>
+
       {/* Students List */}
-      <div className="bg-white shadow-md p-6 rounded-lg">
+      <div className="bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold mb-4">Students</h2>
         <table className="min-w-full table-auto">
           <thead>
@@ -101,7 +112,7 @@ const AdminDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {students.map(student => (
+            {filteredStudents.map(student => (
               <tr key={student.id} className="border-b hover:bg-gray-100">
                 <td className="px-4 py-2">{student.name}</td>
                 <td className="px-4 py-2">{student.unit}</td>
@@ -118,7 +129,7 @@ const AdminDashboard = () => {
                   </select>
                   <button
                     onClick={() => handleRoleChange(student.id)}
-                    className="ml-2 bg-blue-500 text-white px-3 py-1 rounded"
+                    className="ml-2 bg-pink-500 text-white px-3 py-1 rounded"
                   >
                     Change Role
                   </button>

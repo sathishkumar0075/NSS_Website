@@ -14,7 +14,7 @@ const Login = () => {
     setLoading(true);
     const res = await login(email, password);
     if (res.status) {
-      navigate(res.role === "admin" ? "/dashboard" : "/");
+      navigate(res.role === "admin" ? "/admin/dashboard" : "/");
     }
     setLoading(false);
   };

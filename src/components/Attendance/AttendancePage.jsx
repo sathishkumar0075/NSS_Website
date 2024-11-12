@@ -33,6 +33,7 @@ const AttendancePage = () => {
       <div className="flex flex-col bg-black bg-opacity-0 max-md:max-w-full">
         <main className="flex z-10 flex-col pt-1 pb-6 -mt-2.5 bg-gray-50 max-md:max-w-full">
         <AttendanceSummary attendanceData={attendanceData} />
+        <hr className="mx-auto w-4/5 my-4 border-t-2 border-black" />
           <AttendanceTable attendanceData={attendanceData} />
         </main>
       </div>

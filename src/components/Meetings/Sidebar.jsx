@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { HomeIcon, UserGroupIcon, CalendarIcon, ChartBarIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, UserGroupIcon, CalendarIcon, PlusCircleIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 const navItems = [
-  { name: 'Dashboard', path: '/admin/dashboard', icon: <HomeIcon className="h-6 w-6" /> },
-  { name: 'Take Attendance', path: '/admin/take', icon: <UserGroupIcon className="h-6 w-6" /> },
-  { name: 'Meetings', path: '/admin/meetings', icon: <CalendarIcon className="h-6 w-6" /> },
- 
-  { name: 'Create Meetings', path: '/admin/new', icon: <ChartBarIcon className="h-6 w-6" /> },
+  { name: 'Dashboard', path: '/admin/dashboard', icon: <HomeIcon className="h-6 w-6" /> },            // HomeIcon is suitable for Dashboard
+  { name: 'Take Attendance', path: '/admin/take', icon: <UserGroupIcon className="h-6 w-6" /> },       // UserGroupIcon fits well for attendance
+  { name: 'Meetings', path: '/admin/meetings', icon: <CalendarIcon className="h-6 w-6" /> },           // CalendarIcon represents Meetings well
+  { name: 'Create Meetings', path: '/admin/new', icon: <PlusCircleIcon className="h-6 w-6" /> },       // PlusCircleIcon suits creating new items
+  { name: 'Create Events', path: '/admin/events', icon: <SparklesIcon className="h-6 w-6" /> },        // SparklesIcon suggests events or celebrations
 ];
 
 export default function Sidebar() {

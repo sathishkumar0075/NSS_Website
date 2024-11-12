@@ -18,13 +18,11 @@ function NewMeeting() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form data (simple validation example)
     if (!formData.title || !formData.date || !formData.time) {
       alert('Title, date, and time are required fields.');
       return;
     }
 
-    // Convert empty values for optional fields to null
     const dataToSend = {
       ...formData,
       description: formData.description || null,
@@ -35,7 +33,6 @@ function NewMeeting() {
       const response = await axios.post('http://localhost:5000/api/meetings', dataToSend);
       console.log('Meeting created:', response.data);
 
-      // Reset the form on successful submission
       setFormData({
         title: '',
         date: '',
@@ -50,7 +47,6 @@ function NewMeeting() {
   };
 
   const handleCancel = () => {
-    // Reset the form to clear all fields
     setFormData({
       title: '',
       date: '',
@@ -62,87 +58,96 @@ function NewMeeting() {
   };
 
   return (
-    <main className="flex overflow-hidden mb-10 flex-col bg-black bg-opacity-0">
-      <div className="flex flex-col w-full bg-black bg-opacity-0 max-md:max-w-full">
-        <div className="flex relative flex-col pb-14 w-full min-h-[1440px] max-md:max-w-full">
+    <main className="flex items-center ml-12 mb-12 mt-12">
+      <div className="w-full max-w-lg p-8 bg-white rounded-lg ">
+        <h1 className="text-5xl font-bold text-gray-800 mb-2">New Meeting</h1>
+        <p className="text-gray-500 mb-6">Schedule a new meeting</p>
         
-          <section className="flex relative flex-col items-start pr-px pl-20 mt-20 w-full max-md:pl-5 max-md:mt-10 max-md:max-w-full">
-            <h1 className="ml-28 text-4xl font-semibold text-zinc-900 max-md:ml-2.5">New Meeting</h1>
-            <p className="mt-6 ml-28 text-base font-semibold text-neutral-400 max-md:ml-2.5">Schedule a new meeting</p>
-            <form onSubmit={handleSubmit} className="flex flex-col mt-8 ml-20 max-w-full w-[569px] max-md:px-5">
-              <label>
-                Title
-                <input
-                  type="text"
-                  placeholder="Example: 1:1 with Jane"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  className="block w-full p-2 mt-2 mb-4 border rounded"
-                />
-              </label>
-              <label>
-                Date
-                <input
-                  type="date"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                  className="block w-full p-2 mt-2 mb-4 border rounded"
-                />
-              </label>
-              <label>
-                Time
-                <input
-                  type="time"
-                  name="time"
-                  value={formData.time}
-                  onChange={handleChange}
-                  className="block w-full p-2 mt-2 mb-4 border rounded"
-                />
-              </label>
-              <label>
-                Venue
-                <input
-                  type="text"
-                  placeholder="Example: Zoom link, Room 123"
-                  name="venue"
-                  value={formData.venue}
-                  onChange={handleChange}
-                  className="block w-full p-2 mt-2 mb-4 border rounded"
-                />
-              </label>
-              <label>
-                Description
-                <textarea
-                  placeholder="Optional: Add a description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  className="block w-full p-2 mt-2 mb-4 border rounded"
-                />
-              </label>
-              <label>
-                Purpose
-                <textarea
-                  placeholder="Optional: Add a purpose"
-                  name="purpose"
-                  value={formData.purpose}
-                  onChange={handleChange}
-                  className="block w-full p-2 mt-2 mb-4 border rounded"
-                />
-              </label>
-              <div className="flex justify-end gap-8 mt-4">
-                <button type="button" onClick={handleCancel} className="px-4 py-2 bg-gray-300 rounded">
-                  Cancel
-                </button>
-                <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
-                  Create Meeting
-                </button>
-              </div>
-            </form>
-          </section>
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <label className="block">
+            <span className="text-gray-700 font-medium">Title</span>
+            <input
+              type="text"
+              placeholder="Example: 1:1 with Jane"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className="w-full p-3 mt-2 border rounded-lg focus:ring-2 focus:ring-[#FF99B6] focus:border-transparent"
+            />
+          </label>
+
+          <label className="block">
+            <span className="text-gray-700 font-medium">Date</span>
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              className="w-full p-3 mt-2 border rounded-lg focus:ring-2 focus:ring-[#FF99B6] focus:border-transparent"
+            />
+          </label>
+
+          <label className="block">
+            <span className="text-gray-700 font-medium">Time</span>
+            <input
+              type="time"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+              className="w-full p-3 mt-2 border rounded-lg focus:ring-2 focus:ring-[#FF99B6] focus:border-transparent"
+            />
+          </label>
+
+          <label className="block">
+            <span className="text-gray-700 font-medium">Venue</span>
+            <input
+              type="text"
+              placeholder="Example: Zoom link, Room 123"
+              name="venue"
+              value={formData.venue}
+              onChange={handleChange}
+              className="w-full p-3 mt-2 border rounded-lg focus:ring-2 focus:ring-[#FF99B6] focus:border-transparent"
+            />
+          </label>
+
+          <label className="block">
+            <span className="text-gray-700 font-medium">Description</span>
+            <textarea
+              placeholder="Optional: Add a description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              className="w-full p-3 mt-2 border rounded-lg focus:ring-2 focus:ring-[#FF99B6] focus:border-transparent"
+            ></textarea>
+          </label>
+
+          <label className="block">
+            <span className="text-gray-700 font-medium">Purpose</span>
+            <textarea
+              placeholder="Optional: Add a purpose"
+              name="purpose"
+              value={formData.purpose}
+              onChange={handleChange}
+              className="w-full p-3 mt-2 border rounded-lg focus:ring-2 focus:ring-[#FF99B6] focus:border-transparent"
+            ></textarea>
+          </label>
+
+          <div className="flex justify-end gap-4 mt-6">
+            <button 
+              type="button" 
+              onClick={handleCancel} 
+              className="px-4 py-2 bg-gray-300 text-gray-700 font-semibold rounded-lg shadow-sm hover:bg-gray-400 transition-colors"
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit" 
+              className="px-4 py-2 bg-pink-500 text-white font-semibold rounded-lg shadow-sm hover:bg-[#FF3B71] transition-colors"
+            >
+              Create Meeting
+            </button>
+          </div>
+        </form>
       </div>
     </main>
   );

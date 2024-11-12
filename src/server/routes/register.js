@@ -49,6 +49,7 @@ const JWT_SECRET = "Vettaiyan"; // Add JWT_SECRET in your .env file
 // });
 
 router.post("/", async (req, res) => {
+  
   const {
     name,
     registerNo,
@@ -62,6 +63,7 @@ router.post("/", async (req, res) => {
     aadharNo,
     password,
   } = req.body;
+  console.log("Pinged at register : ",req.body);
 
   try {
     // Fetch the current number of students in each unit
@@ -111,6 +113,7 @@ router.post("/", async (req, res) => {
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
     `;
     console.log(insertQuery);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     await query(insertQuery, [
       name,
@@ -123,7 +126,7 @@ router.post("/", async (req, res) => {
       email,
       mobile,
       aadharNo,
-      password,
+      hashedPassword,
       assignedUnit,
     ]);
 

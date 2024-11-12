@@ -8,6 +8,7 @@ import Contact from './Contact.js';
 import Footer from './Footer.js';
 
 const MainPage = () => {
+  
   return (
     <div className="flex overflow-hidden flex-col pt-16 bg-white">
       <div className="flex flex-col px-20 w-full max-md:px-5 max-md:max-w-full">

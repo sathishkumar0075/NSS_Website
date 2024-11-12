@@ -55,7 +55,7 @@ function MeetingDetails() {
                     const data = await response.json();
                     const attendanceWithStatus = data.map((item) => ({
                         ...item,
-                        status: 'Present', // Default status for each student
+                        status: 'Present',
                     }));
                     setState((prevState) => ({ ...prevState, attendanceData: attendanceWithStatus }));
                 } catch (error) {
@@ -86,18 +86,18 @@ function MeetingDetails() {
     };
 
     return (
-        <section className="flex ml-6 flex-col mx-auto w-full max-w-full mt-12 p-3 bg-white  rounded-lg">
-            <div className="flex flex-col mb-8">
-                <h1 className="text-3xl font-semibold text-gray-800">General Body Meeting</h1>
-                <p className="text-sm text-gray-500 mt-2">9/13/22, 6:00PM</p>
+        <section className=" mx-auto p-6  rounded-lg mt-12">
+            <div className="mb-6">
+                <h1 className="text-4xl font-bold text-gray-800">General Body Meeting</h1>
+                <p className="text-gray-600 mt-2">9/13/22, 6:00PM</p>
 
                 {state.error && <p className="text-red-600 mt-4">{state.error}</p>}
 
-                <div className="flex mt-6 space-x-4 w-3/4">
+                <div className="flex mt-6 space-x-4">
                     <select
                         value={state.selectedOption}
                         onChange={handleSelectMeeting}
-                        className="w-full py-2 px-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
+                        className="w-full py-3 px-4 bg-white border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF99B6] transition"
                     >
                         <option value="" disabled>Select Meeting</option>
                         {state.options.map((option) => (
@@ -107,7 +107,7 @@ function MeetingDetails() {
                     <select
                         value={state.selectedUnit}
                         onChange={handleSelectUnit}
-                        className="w-full py-2 px-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
+                        className="w-full py-3 px-4 bg-white border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF99B6] transition"
                     >
                         <option value="" disabled>Select Unit</option>
                         {[...Array(10).keys()].map((number) => (
@@ -117,38 +117,40 @@ function MeetingDetails() {
                 </div>
             </div>
 
-            <h2 className="text-lg font-semibold text-gray-700 mb-4 mt-12 ">Mark Attendance</h2>
-            {state.attendanceData.map((student) => (
-                <div key={student.id} className="flex items-center justify-between py-2 w-1/2 border-b border-gray-200">
-                    <span className="text-gray-800">{student.name}</span>
-                    <div className="flex space-x-2 mr-24">
-                        <button
-                            className={`px-4 py-1 rounded-full  font-medium transition ${
-                                student.status === 'Present'
-                                    ? 'bg-green-500 text-white'
-                                    : 'bg-green-100 text-green-700'
-                            }`}
-                            onClick={() => handleStatusChange(student.id, 'Present')}
-                        >
-                            Present
-                        </button>
-                        <button
-                            className={`px-4 py-1 rounded-full font-medium transition ${
-                                student.status === 'Absent'
-                                    ? 'bg-red-500 text-white'
-                                    : 'bg-red-100 text-red-700'
-                            }`}
-                            onClick={() => handleStatusChange(student.id, 'Absent')}
-                        >
-                            Absent
-                        </button>
+            <h2 className="text-xl font-semibold text-gray-700 mb-4">Mark Attendance</h2>
+            <div className="space-y-4">
+                {state.attendanceData.map((student) => (
+                    <div key={student.id} className="flex items-center justify-between py-3 px-4 bg-white rounded-lg shadow-sm">
+                        <span className="text-gray-800">{student.name}</span>
+                        <div className="flex space-x-3">
+                            <button
+                                className={`px-6 py-2 rounded-full font-medium transition ${
+                                    student.status === 'Present'
+                                        ? 'bg-[#FF99B6] text-white'
+                                        : 'bg-[#FFE3EC] text-[#FF3B71]'
+                                }`}
+                                onClick={() => handleStatusChange(student.id, 'Present')}
+                            >
+                                Present
+                            </button>
+                            <button
+                                className={`px-6 py-2 rounded-full font-medium transition ${
+                                    student.status === 'Absent'
+                                        ? 'bg-red-500 text-white'
+                                        : 'bg-red-100 text-red-700'
+                                }`}
+                                onClick={() => handleStatusChange(student.id, 'Absent')}
+                            >
+                                Absent
+                            </button>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
 
             <button 
                 onClick={handleSaveAttendance} 
-                className="mt-16 w-1/2 py-3 bg-pink-500 items-center justify-center ml-44  text-white rounded-lg font-semibold transition hover:bg-pink-600"
+                className="mt-8 w-full py-3 bg-[#FF99B6] text-white font-bold text-lg rounded-md hover:bg-[#FF3B71] transition-all duration-300 shadow-lg"
             >
                 Save Attendance
             </button>
