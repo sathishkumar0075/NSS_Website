@@ -9,8 +9,44 @@ const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
+  // New state variables for validation errors
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const validateEmail = (email) => {
+    // Simple email regex for validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    // Example: password must be at least 6 characters
+    return password.length >= 6;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let valid = true;
+
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address.");
+      valid = false;
+    } else {
+      setEmailError("");
+    }
+
+    if (!validatePassword(password)) {
+      setPasswordError("Password must be at least 6 characters.");
+      valid = false;
+    } else {
+      setPasswordError("");
+    }
+
+    if (!valid) {
+      return;
+    }
+
     setLoading(true);
     const res = await login(email, password);
     if (res.status) {
@@ -41,6 +77,7 @@ const Login = () => {
                 className="w-full text-pink-800 bg-transparent placeholder-pink-400 focus:outline-none"
               />
             </div>
+            {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
           </div>
 
           {/* Password Field */}
@@ -57,6 +94,7 @@ const Login = () => {
                 className="w-full text-pink-800 bg-transparent placeholder-pink-400 focus:outline-none"
               />
             </div>
+            {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
           </div>
 
           {/* Submit Button */}

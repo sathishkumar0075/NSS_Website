@@ -6,9 +6,12 @@ import registerRoutes from './routes/register.js';
 import meetingRoutes from "./routes/meetings.js";
 import loginRoutes from "./routes/login.js";
 import eventRoutes from "./routes/events.js";
+import unitRoutes from "./routes/units.js";
 import { query } from './db/index.js';
 import bcrypt from 'bcryptjs';
 import analyticsRoutes from "./routes/analytics.js";
+import fs from 'fs';
+import path from 'path';
 
 
 const JWT_SECRET = "Vettaiyan";
@@ -20,9 +23,23 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+// Resolve the correct path for the 'uploads' directory
+const __dirname = path.resolve();
+const uploadsDir = path.join(__dirname, 'uploads'); // Ensure the correct path
+
+// Ensure the uploads directory exists
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true }); // Create the directory if it doesn't exist
+}
+
+console.log('Uploads directory:', uploadsDir);
+
+// Serve static files from the uploads directory
+app.use('/uploads', express.static(uploadsDir));
 
 // Routes
 app.use('/api/attendance', attendanceRoutes);
+app.use('/api/units',unitRoutes);
 app.use('/api/register', registerRoutes);
 app.use('/api/meetings',meetingRoutes);
 app.use('/api/login',loginRoutes);

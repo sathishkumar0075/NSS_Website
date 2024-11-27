@@ -14,6 +14,7 @@ import MeetingDetails from "./components/Meetings/MeetingDetails.jsx";
 import AttendanceList from './components/AttendanceTracker/AttendanceList.jsx';
 import AdminDashboard from './components/Dashboard/AdminDashboard.js';
 import AddEvent from './components/Events/AddEvents.js';
+import ExportPage from './components/Export/ExportPage.js';
 import { UserProvider } from './UserContext.js'; 
 
 
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="take" element={<MeetingDetails />} />
           <Route path="new" element={<AdminRoute><NewMeeting /></AdminRoute>} />
           <Route path="scheduled-meetings" element={<AdminRoute><ScheduledMeetings /></AdminRoute>} />
+          <Route path="export" element={<AdminRoute><ExportPage /></AdminRoute>} />
         </Route>
         
       </Routes>

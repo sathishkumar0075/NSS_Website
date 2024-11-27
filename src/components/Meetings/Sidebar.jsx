@@ -7,7 +7,8 @@ const navItems = [
   { name: 'Take Attendance', path: '/admin/take', icon: <UserGroupIcon className="h-6 w-6" /> },       // UserGroupIcon fits well for attendance
   { name: 'Meetings', path: '/admin/meetings', icon: <CalendarIcon className="h-6 w-6" /> },           // CalendarIcon represents Meetings well
   { name: 'Create Meetings', path: '/admin/new', icon: <PlusCircleIcon className="h-6 w-6" /> },       // PlusCircleIcon suits creating new items
-  { name: 'Create Events', path: '/admin/events', icon: <SparklesIcon className="h-6 w-6" /> },        // SparklesIcon suggests events or celebrations
+  { name: 'Create Events', path: '/admin/events', icon: <SparklesIcon className="h-6 w-6" /> }, 
+  { name: 'Export', path: '/admin/export', icon: <PlusCircleIcon className="h-6 w-6" /> },       // SparklesIcon suggests events or celebrations
 ];
 
 export default function Sidebar() {

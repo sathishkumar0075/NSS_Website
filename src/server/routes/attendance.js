@@ -32,6 +32,34 @@ router.get('/:unitId', async (req, res) => {
   }
 });
 
+router.get('/user/:userId', async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    console.log('userId:', userId);
+
+    const queryText = 'SELECT * FROM master_attendance WHERE reg_no = $1';
+    const queryParams = [userId];
+
+    console.log('Executing query:', queryText, 'with params:', queryParams);
+
+    const result = await query(queryText, queryParams);
+
+    const rows = result.rows;
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'No attendance data found for this user.' });
+    }
+
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching attendance data:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
+
+
 
 
 // Add a new attendance record for a user

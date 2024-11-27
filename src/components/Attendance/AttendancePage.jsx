@@ -11,7 +11,7 @@ const AttendancePage = () => {
 
   useEffect(() => {
     // Fetch attendance data based on the userId from the URL
-    fetch(`http://localhost:5000/api/attendance/${userId}`)
+    fetch(`http://localhost:5000/api/attendance/user/${userId}`)
       .then((response) => response.json())
       .then((data) => {
         // Ensure that data is an array before setting it in state

@@ -47,6 +47,25 @@ const AdminDashboard = () => {
       .catch(error => console.error('Error updating role:', error));
   };
 
+  const fetchData = ()=>{
+    axios.get('http://localhost:5000/api/analytics/students')
+      .then(response => setStudents(response.data))
+      .catch(error => console.error('Error fetching students:', error));
+  }
+
+  const handleDelete = (studentId) => {
+    const selectedRole = roles[studentId];
+    // Update the role of the student
+    axios.delete(`http://localhost:5000/api/analytics/students/${studentId}/delete`)
+      .then(response => {
+        fetchData()
+        alert('Deleted User successfully');
+      })
+      .catch(error => console.error('Error updating role:', error));
+  };
+
+
+
   // Filter students based on the search term
   const filteredStudents = students.filter(student =>
     student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -109,6 +128,7 @@ const AdminDashboard = () => {
               <th className="px-4 py-2 text-left">Unit</th>
               <th className="px-4 py-2 text-left">Role</th>
               <th className="px-4 py-2 text-left">Change Role</th>
+              <th className="px-8 py-2 text-left">Delete user</th>
             </tr>
           </thead>
           <tbody>
@@ -117,13 +137,13 @@ const AdminDashboard = () => {
                 <td className="px-4 py-2">{student.name}</td>
                 <td className="px-4 py-2">{student.unit}</td>
                 <td className="px-4 py-2">{student.role}</td>
-                <td className="px-4 py-2">
+                <td className="px-4py-2">
                   <select
                     onChange={(e) => setRoles(prevRoles => ({ ...prevRoles, [student.id]: e.target.value }))}
                     value={roles[student.id] || student.role} // Default to student's current role
                     className="border border-gray-300 rounded px-2 py-1"
                   >
-                    <option value="student">Student</option>
+               
                     <option value="admin">Admin</option>
                     <option value="volunteer">Volunteer</option>
                   </select>
@@ -133,6 +153,15 @@ const AdminDashboard = () => {
                   >
                     Change Role
                   </button>
+                </td>
+                <td className='px-8 py-2'>
+                <button
+                    onClick={() => handleDelete(student.id)}
+                    className="ml-2 bg-pink-500 text-white px-3 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+
                 </td>
               </tr>
             ))}

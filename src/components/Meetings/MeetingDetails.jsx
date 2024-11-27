@@ -9,6 +9,8 @@ function MeetingDetails() {
         error: null,
     });
 
+    const [currentDate, setCurrentDate] = useState('');
+
     const handleSelectUnit = (event) => {
         setState((prevState) => ({
             ...prevState,
@@ -35,6 +37,19 @@ function MeetingDetails() {
             }
         };
         fetchOptions();
+    }, []);
+
+    useEffect(() => {
+        // Format the current date
+        const now = new Date();
+        const formattedDate = now.toLocaleString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+        setCurrentDate(formattedDate);
     }, []);
 
     const handleStatusChange = (id, newStatus) => {
@@ -89,7 +104,7 @@ function MeetingDetails() {
         <section className=" mx-auto p-6  rounded-lg mt-12">
             <div className="mb-6">
                 <h1 className="text-4xl font-bold text-gray-800">General Body Meeting</h1>
-                <p className="text-gray-600 mt-2">9/13/22, 6:00PM</p>
+                <p className="text-gray-600 mt-2">{currentDate}</p>
 
                 {state.error && <p className="text-red-600 mt-4">{state.error}</p>}
 

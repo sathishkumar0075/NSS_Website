@@ -35,7 +35,7 @@ const Summary = ({ length, average, unitChartData }) => {
       <div className="self-stretch mt-5 max-md:mr-0.5 max-md:max-w-full">
         <div className="flex gap-5 max-md:flex-col">
           <div className="flex-1">
-            <SummaryCard title="Meetings attended" value={totalMeetings} />
+            <SummaryCard title="Total Meetings" value={totalMeetings} />
           </div>
           <div className="flex-1">
             <SummaryCard title="Average Attendance" value={`${attendancePercentage}%`} />

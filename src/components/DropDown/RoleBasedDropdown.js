@@ -8,6 +8,7 @@ import { useContext } from 'react';
 const RoleBasedDropdown = () => {
   const { user, logout } = useUser();
   console.log("User Role in Dropdown: ", user?.role);
+  console.log(user)
   const [isOpen, setIsOpen] = useState(false);
 
   // Toggle dropdown visibility
